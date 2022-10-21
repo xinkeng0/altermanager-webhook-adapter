@@ -12,6 +12,7 @@ type AlertManagerMessage struct {
 			Alertname string `json:"alertname"`
 			Severity  string `json:"severity"`
 			Instance  string `json:"instance"`
+			Team      string `json:"team"`
 		}
 		Annotations struct {
 			Description string `json:"description"`

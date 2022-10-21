@@ -7,7 +7,7 @@
     **告警摘要**：{{ $alert.Annotations.Summary }}
     **告警详情**：{{ $alert.Annotations.Description }}
     **触发阀值**：{{ $alert.Annotations.Value }}
-    **维护团队**: {{ .Labels.team | upper }}
+    **维护团队**: {{ .Labels.Team }}
     **触发时间**：{{ $alert.StartsAt.Format "2006-01-02 15:04:05" }}
     **恢复时间**：{{ $alert.EndsAt.Format "2006-01-02 15:04:05" }}
     ========end=============
