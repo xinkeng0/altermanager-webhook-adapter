@@ -30,7 +30,7 @@ func index(responseWriter http.ResponseWriter, request *http.Request) {
 	// 目前默认只支持企业微信
 	adapter.SendMessage(alertManagerMessage, formValue("url"))
 	// 往w里写入内容，就会在浏览器里输出
-	fmt.Fprintf(responseWriter, "发送成功!")
+	fmt.Fprintf(responseWriter, "{\"message\":\"successful receive alert notification message!\"}")
 }
 
 func main() {

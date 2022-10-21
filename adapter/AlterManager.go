@@ -2,7 +2,7 @@ package adapter
 
 import "time"
 
-// alert manager webhook mesage struc
+// AlertManagerMessage alert manager webhook message struct
 type AlertManagerMessage struct {
 	Receiver string `json:"receiver"`
 	Status   string `json:"status"`
