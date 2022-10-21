@@ -9,8 +9,10 @@ WORKDIR /app
 
 COPY . .
 
+RUN go mod download
+
 # 指定OS等，并go build
-RUN GOOS=linux GOARCH=amd64 go build .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build .
 
 # 运行阶段指定scratch作为基础镜像
 FROM alpine
@@ -18,7 +20,7 @@ FROM alpine
 WORKDIR /app
 
 # 将上一个阶段的文件复制进来
-COPY --from=build /app/main /
+COPY --from=build /app /app
 
 # 指定运行时环境变量
 ENV GIN_MODE=release \
@@ -26,4 +28,4 @@ ENV GIN_MODE=release \
 
 EXPOSE 8080
 
-ENTRYPOINT ["./main"]
+ENTRYPOINT ["./webhook-adapter"]
