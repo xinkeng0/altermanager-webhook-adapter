@@ -14,16 +14,21 @@ import (
 func index(responseWriter http.ResponseWriter, request *http.Request) {
 	// 解析发送参数
 	request.ParseForm()
-	fmt.Fprintln(responseWriter, request.Form)
 	formValue := request.FormValue
 	all, _ := io.ReadAll(request.Body)
 	var tempMap map[string]interface{}
 	err := json.Unmarshal(all, &tempMap)
+
+	var alertManagerMessage adapter.AlertManagerMessage
+	err = json.Unmarshal(all, &alertManagerMessage)
+	if err != nil {
+		return
+	}
 	if err != nil {
 		return
 	}
 	// 目前默认只支持企业微信
-	adapter.SendMessage(tempMap, formValue("url"))
+	adapter.SendMessage(alertManagerMessage, formValue("url"))
 	// 往w里写入内容，就会在浏览器里输出
 	fmt.Fprintf(responseWriter, "发送成功!")
 }

@@ -18,9 +18,10 @@ type Message struct {
 	} `json:"text"`
 }
 
-func SendMessage(msg map[string]interface{}, url string) {
+func SendMessage(msg AlertManagerMessage, url string) {
 	var m Message
 	m.MsgType = "text"
+	// parse template
 	files, err := template.ParseFiles("adapter/wework.tmpl")
 	if err != nil {
 		fmt.Println("create template failed, err:", err)
@@ -33,6 +34,7 @@ func SendMessage(msg map[string]interface{}, url string) {
 		return
 	}
 	m.Text.Content = buf.String()
+	// send messages to wework
 	jsons, err := json.Marshal(m)
 	if err != nil {
 		log.Fatal("SendMessage Marshal failed!", err)

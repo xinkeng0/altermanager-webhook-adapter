@@ -1,0 +1,14 @@
+{{ define "wechat.default.message" }}
+{{ range $i, $alert := .alerts }}
+========监控报警==========
+告警状态：{{   .status }}
+告警级别：{{ $alert.labels.severity }}
+告警类型：{{ $alert.labels.alertname }}
+告警应用：{{ $alert.annotations.summary }}
+告警主机：{{ $alert.labels.instance }}
+告警详情：{{ $alert.annotations.description }}
+触发阀值：{{ $alert.annotations.value }}
+告警时间：{{ $alert.startsAt.Format "2006-01-02 15:04:05" }}
+========end=============
+{{ end }}
+{{ end }}
